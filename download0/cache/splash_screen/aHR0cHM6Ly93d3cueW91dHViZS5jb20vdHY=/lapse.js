@@ -1896,9 +1896,11 @@
             
             await cleanup();
             
-            await log("Lapse finished\nClosing Y2JB...");
-            send_notification("Lapse finished\nClosing Y2JB...");
+            await log("Lapse finished!");
+            send_notification("Lapse finished!");
             
+            await autoload();
+
             kill_youtube();
             
         } catch (e) {

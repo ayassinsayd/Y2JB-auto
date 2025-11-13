@@ -6,6 +6,7 @@
 */
 
 const version_string = "Y2JB 1.2 by Gezine";
+const auto_version_string = "autoY2JB v0.1";
 
 function load_localscript(src) {
     return new Promise((resolve, reject) => {
@@ -23,7 +24,7 @@ function load_localscript(src) {
 
 let NETWORK_LOGGING = false;
 // Use setlogserver.js payload to change server url at runtime
-let LOG_SERVER = 'http://192.168.1.180:8080/log';
+let LOG_SERVER = 'http://192.168.43.111:8080/log';
 
 async function checkLogServer() {
     try {
@@ -91,6 +92,10 @@ async function log(msg) {
             });
         } catch (e) { }
     }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function toHex(num) {
@@ -907,7 +912,11 @@ function trigger() {
         // MAIN EXECUTION //
         ////////////////////
         
-        await load_localscript('remotejsloader.js');
+        send_notification(auto_version_string);
+        sleep(1000);
+
+        //await load_localscript('remotejsloader.js');
+        await load_localscript('lapse.js');
         
     } catch (e) {                
         await log('EXCEPTION: ' + e.message);
